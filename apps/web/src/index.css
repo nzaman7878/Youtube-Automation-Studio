@@ -3,13 +3,88 @@
 @tailwind utilities;
 
 :root {
+  /* ========================================================================
+   * STUDIO OBSIDIAN DESIGN TOKENS
+   * ======================================================================== */
+  --bg-base: #07090e;
+  --bg-surface-1: #0d111a;
+  --bg-surface-2: #131824;
+  --bg-surface-glass: rgba(13, 17, 26, 0.75);
+  --bg-overlay: rgba(7, 9, 14, 0.85);
+
+  --accent-primary: #ff2a36;
+  --accent-primary-hover: #ff4552;
+  --accent-primary-glow: rgba(255, 42, 54, 0.25);
+  --accent-cyan: #00f2fe;
+  --accent-amber: #ffb800;
+  --accent-emerald: #00e599;
+  --accent-purple: #a855f7;
+
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-medium: rgba(255, 255, 255, 0.12);
+  --border-highlight: rgba(255, 255, 255, 0.22);
+  --border-accent: rgba(255, 42, 54, 0.4);
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-accent: #ff4552;
+
+  --shadow-elevation-1: 0 2px 8px -2px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-elevation-2: 0 8px 24px -4px rgba(0, 0, 0, 0.65), 0 2px 6px rgba(0, 0, 0, 0.4);
+  --shadow-elevation-3: 0 20px 48px -8px rgba(0, 0, 0, 0.8), 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-glow-red: 0 0 24px -4px rgba(255, 42, 54, 0.35);
+  --shadow-glow-cyan: 0 0 24px -4px rgba(0, 242, 254, 0.35);
+
   color-scheme: dark;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
-    sans-serif;
-  background-color: #020617;
-  color: #f8fafc;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Glassmorphism Panel Utility */
+.glass-panel {
+  background: var(--bg-surface-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-elevation-1);
+}
+
+.glass-panel-elevated {
+  background: var(--bg-surface-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-medium);
+  box-shadow: var(--shadow-elevation-2);
+}
+
+/* Tabular Numerics for Telemetry and Quotas */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Custom Obsidian Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-highlight);
 }

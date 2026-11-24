@@ -9,14 +9,14 @@
 
 ## Progress Overview
 - **Total Phases:** 110
-- **Completed:** 9 / 110 (8.2%)
-- **Current Active Phase:** Phase 9 complete. Ready for Phase 10.
+- **Completed:** 10 / 110 (9.1%)
+- **Current Active Phase:** Section A (Foundation, Phases 1–10) complete. Ready for Section B (Phase 11).
 
 ---
 
 ## Roadmap
 
-### A. Foundation (1–10)
+### A. Foundation (1–10) — [10/10 COMPLETE]
 - [x] ✅ **Phase 1:** Product brief, scope, personas → `PRD.md`
 - [x] ✅ **Phase 2:** Monorepo setup, tooling, lint, TS config
 - [x] ✅ **Phase 3:** Docker Compose (Mongo, Redis, n8n)
@@ -26,7 +26,7 @@
 - [x] ✅ **Phase 7:** Shared package: types and Zod schemas
 - [x] ✅ **Phase 8:** CI pipeline (lint, type-check, test)
 - [x] ✅ **Phase 9:** `SETUP.md` and `ARCHITECTURE.md` v1
-- [ ] ⬜ **Phase 10:** Design tokens + Tailwind theme + `DESIGN.md` v1
+- [x] ✅ **Phase 10:** Design tokens + Tailwind theme + `DESIGN.md` v1
 
 ### B. Docs Site (11–16)
 - [ ] ⬜ **Phase 11:** Docs page shell + layout

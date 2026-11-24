@@ -9,8 +9,8 @@
 
 ## Progress Overview
 - **Total Phases:** 110
-- **Completed:** 7 / 110 (6.4%)
-- **Current Active Phase:** Phase 7 complete. Ready for Phase 8.
+- **Completed:** 8 / 110 (7.3%)
+- **Current Active Phase:** Phase 8 complete. Ready for Phase 9.
 
 ---
 
@@ -24,7 +24,7 @@
 - [x] ✅ **Phase 5:** Express app skeleton, error handling, logging
 - [x] ✅ **Phase 6:** MongoDB connection + base Mongoose patterns
 - [x] ✅ **Phase 7:** Shared package: types and Zod schemas
-- [ ] ⬜ **Phase 8:** CI pipeline (lint, type-check, test)
+- [x] ✅ **Phase 8:** CI pipeline (lint, type-check, test)
 - [ ] ⬜ **Phase 9:** `SETUP.md` and `ARCHITECTURE.md` v1
 - [ ] ⬜ **Phase 10:** Design tokens + Tailwind theme + `DESIGN.md` v1
 

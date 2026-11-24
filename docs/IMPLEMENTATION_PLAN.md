@@ -9,8 +9,8 @@
 
 ## Progress Overview
 - **Total Phases:** 110
-- **Completed:** 1 / 110 (0.9%)
-- **Current Active Phase:** Phase 1 complete. Ready for Phase 2.
+- **Completed:** 2 / 110 (1.8%)
+- **Current Active Phase:** Phase 2 complete. Ready for Phase 3.
 
 ---
 
@@ -18,7 +18,7 @@
 
 ### A. Foundation (1–10)
 - [x] ✅ **Phase 1:** Product brief, scope, personas → `PRD.md`
-- [ ] ⬜ **Phase 2:** Monorepo setup, tooling, lint, TS config
+- [x] ✅ **Phase 2:** Monorepo setup, tooling, lint, TS config
 - [ ] ⬜ **Phase 3:** Docker Compose (Mongo, Redis, n8n)
 - [ ] ⬜ **Phase 4:** Env/config system with validation
 - [ ] ⬜ **Phase 5:** Express app skeleton, error handling, logging

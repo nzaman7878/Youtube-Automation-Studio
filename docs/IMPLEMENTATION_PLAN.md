@@ -9,8 +9,8 @@
 
 ## Progress Overview
 - **Total Phases:** 110
-- **Completed:** 5 / 110 (4.5%)
-- **Current Active Phase:** Phase 5 complete. Ready for Phase 6.
+- **Completed:** 6 / 110 (5.5%)
+- **Current Active Phase:** Phase 6 complete. Ready for Phase 7.
 
 ---
 
@@ -22,7 +22,7 @@
 - [x] ✅ **Phase 3:** Docker Compose (Mongo, Redis, n8n)
 - [x] ✅ **Phase 4:** Env/config system with validation
 - [x] ✅ **Phase 5:** Express app skeleton, error handling, logging
-- [ ] ⬜ **Phase 6:** MongoDB connection + base Mongoose patterns
+- [x] ✅ **Phase 6:** MongoDB connection + base Mongoose patterns
 - [ ] ⬜ **Phase 7:** Shared package: types and Zod schemas
 - [ ] ⬜ **Phase 8:** CI pipeline (lint, type-check, test)
 - [ ] ⬜ **Phase 9:** `SETUP.md` and `ARCHITECTURE.md` v1

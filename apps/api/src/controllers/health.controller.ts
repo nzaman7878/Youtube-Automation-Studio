@@ -1,6 +1,7 @@
 import { type Request, type Response } from 'express';
 import { sendSuccess } from '../utils/response.js';
 import { config } from '../config.js';
+import { database, DatabaseState } from '../database/connection.js';
 import { QuotaConstants } from '@yt-studio/shared';
 
 export interface HealthCheckData {
@@ -16,7 +17,7 @@ export interface HealthCheckData {
   };
   services: {
     api: 'up';
-    database: 'pending_connection' | 'connected';
+    database: DatabaseState | 'connected';
     redis: 'pending_connection' | 'connected';
   };
   quota: {
@@ -27,6 +28,7 @@ export interface HealthCheckData {
 
 export function getHealthStatus(_req: Request, res: Response): Response {
   const memoryUsage = process.memoryUsage();
+  const dbState = database.getState();
 
   const healthData: HealthCheckData = {
     status: 'healthy',
@@ -41,7 +43,7 @@ export function getHealthStatus(_req: Request, res: Response): Response {
     },
     services: {
       api: 'up',
-      database: 'pending_connection',
+      database: dbState,
       redis: 'pending_connection',
     },
     quota: {

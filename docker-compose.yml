@@ -1,0 +1,106 @@
+services:
+  # ============================================================================
+  # 1. MongoDB 7.0 (Replica Set 'rs0' for Multi-Document ACID Transactions)
+  # ============================================================================
+  mongo:
+    image: mongo:7.0
+    container_name: yt-studio-mongo
+    restart: unless-stopped
+    command: ["--replSet", "rs0", "--bind_ip_all"]
+    ports:
+      - "${MONGO_PORT:-27017}:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE:-yt_automation_studio}
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - yt-network
+
+  # Initialization helper to automatically provision replica set 'rs0'
+  mongo-init:
+    image: mongo:7.0
+    container_name: yt-studio-mongo-init
+    restart: "no"
+    depends_on:
+      mongo:
+        condition: service_healthy
+    volumes:
+      - ./infra/docker/mongo-init.sh:/scripts/mongo-init.sh:ro
+    entrypoint: ["/bin/bash", "/scripts/mongo-init.sh"]
+    networks:
+      - yt-network
+
+  # ============================================================================
+  # 2. Redis 7.2 (BullMQ Persistent Queue & Caching Engine)
+  # ============================================================================
+  redis:
+    image: redis:7.2-alpine
+    container_name: yt-studio-redis
+    restart: unless-stopped
+    command: >
+      redis-server /usr/local/etc/redis/redis.conf
+      --requirepass ${REDIS_PASSWORD:-redis_dev_secret_456}
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+      - ./infra/docker/redis.conf:/usr/local/etc/redis/redis.conf:ro
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-redis_dev_secret_456}", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    networks:
+      - yt-network
+
+  # ============================================================================
+  # 3. n8n Visual Automation Engine (Self-Hosted via Docker)
+  # ============================================================================
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: yt-studio-n8n
+    restart: unless-stopped
+    ports:
+      - "${N8N_PORT:-5678}:5678"
+    environment:
+      - N8N_PORT=5678
+      - N8N_HOST=${N8N_HOST:-localhost}
+      - N8N_PROTOCOL=${N8N_PROTOCOL:-http}
+      - WEBHOOK_URL=${N8N_WEBHOOK_URL:-http://localhost:5678/}
+      - GENERIC_TIMEZONE=UTC
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+      - N8N_DIAGNOSTICS_ENABLED=false
+      - N8N_VERSION_NOTIFICATIONS_ENABLED=false
+      - N8N_BASIC_AUTH_ACTIVE=${N8N_BASIC_AUTH_ACTIVE:-true}
+      - N8N_BASIC_AUTH_USER=${N8N_BASIC_AUTH_USER:-admin}
+      - N8N_BASIC_AUTH_PASSWORD=${N8N_BASIC_AUTH_PASSWORD:-admin_n8n_secret_789}
+    volumes:
+      - n8n_data:/home/node/.n8n
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://localhost:5678/healthz || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+    networks:
+      - yt-network
+
+volumes:
+  mongo_data:
+    name: yt_studio_mongo_data
+  redis_data:
+    name: yt_studio_redis_data
+  n8n_data:
+    name: yt_studio_n8n_data
+
+networks:
+  yt-network:
+    name: yt_studio_network
+    driver: bridge
